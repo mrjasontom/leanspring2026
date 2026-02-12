@@ -27,3 +27,11 @@ theorem transitivity (a b c : ℕ) : (a=b) ∧ (b=c) → (a=c) := by {
   rw [hl]
   rw [hr]
 }
+
+theorem subtraction_not_associative321 : (3 - 2) - 1 ≠ 3 - (2 - 1) := by {
+  simp --automatic tactic
+}
+
+theorem addition_is_commutative (a b c : ℕ) : (a + b) + c = a + (b + c) := by {
+
+}
