@@ -36,7 +36,27 @@ theorem addition_is_associative (a b c : ℕ) : (a + b) + c = a + (b + c) := by 
   exact Nat.add_assoc a b c
 }
 
-theorem addition_is_commutative (a b c : ℕ): a + b + c = b + a + c := by {
+theorem addition_is_commutative (a b c : ℕ) : a + b + c = b + a + c := by {
   refine Nat.add_left_inj.mpr ?_
   exact Nat.add_comm a b
 }
+
+theorem multiplication_is_commutative3 (a b c : ℕ) : a*b*c = b*a*c := by {
+
+}
+
+-- Define the new inductive type "Drum"
+inductive Drum where
+  | kick  : Drum
+  | snare : Drum
+  | hat : Drum
+  deriving Repr -- This allows us to print/inspect the type
+
+-- Define a song as a List of Drum
+def mySong1 : List Drum :=
+  [Drum.hat, Drum.kick, Drum.hat, Drum.snare,
+   Drum.hat, Drum.kick, Drum.snare, Drum.snare]
+
+--make another type for Diggeridoo and laser and other
+
+--make another song as a List
