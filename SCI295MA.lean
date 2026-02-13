@@ -32,6 +32,11 @@ theorem subtraction_not_associative321 : (3 - 2) - 1 ≠ 3 - (2 - 1) := by {
   simp --automatic tactic
 }
 
-theorem addition_is_commutative (a b c : ℕ) : (a + b) + c = a + (b + c) := by {
+theorem addition_is_associative (a b c : ℕ) : (a + b) + c = a + (b + c) := by {
   exact Nat.add_assoc a b c
+}
+
+theorem addition_is_commutative (a b c : ℕ): a + b + c = b + a + c := by {
+  refine Nat.add_left_inj.mpr ?_
+  exact Nat.add_comm a b
 }
