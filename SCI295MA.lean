@@ -11,7 +11,7 @@ theorem inductive_step_for_add_zero (n : ℕ) : (n + 0 = n) → ((n+1) + 0 = (n+
   exact fun a ↦ (fun {m k n} ↦ Nat.add_left_inj.mpr) rfl
 }
 
-theorem add_zero (n : Nat) : n + 0 = n := by {
+theorem add_zerojt (n : Nat) : n + 0 = n := by {
   induction n with
   | zero =>
     -- Base case: 0 + 0 = 0
@@ -49,7 +49,9 @@ lemma mult_by_zero_makes_comm (a b c : ℕ) : c = 0 → a*b*c = b*a*c := by {
 
 theorem multiplication_is_commutative3 (a b c : ℕ) : a*b*c = b*a*c := by {
   by_cases h : c = 0
-
+  exact mult_by_zero_makes_comm a b c h
+  refine (Nat.mul_left_inj h).mpr ?_
+  exact Nat.mul_comm a b
 }
 
 -- Define the new inductive type "Drum"
@@ -64,6 +66,6 @@ def mySong1 : List Drum :=
   [Drum.hat, Drum.kick, Drum.hat, Drum.snare,
    Drum.hat, Drum.kick, Drum.snare, Drum.snare]
 
---make another type for Diggeridoo and laser and other
+--make another type for Didgeridoo and laser and other
 
 --make another song as a List
