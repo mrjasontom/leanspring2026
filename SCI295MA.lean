@@ -7,7 +7,7 @@ theorem one_is_succ_zero (n : ℕ) : (1 : ℕ) = Nat.succ (0 : ℕ) := by {
 }
 
 theorem inductive_step_for_add_zero (n : ℕ) : (n + 0 = n) → ((n+1) + 0 = (n+1)) := by {
-
+  exact fun a ↦ (fun {m k n} ↦ Nat.add_left_inj.mpr) rfl
 }
 
 theorem add_zero (n : Nat) : n + 0 = n := by {
@@ -18,7 +18,7 @@ theorem add_zero (n : Nat) : n + 0 = n := by {
   | succ n ih =>
     -- Inductive step: (n + 1) + 0 = (n + 1)
     -- ih is the inductive hypothesis: n + 0 = n
-    simp [Nat.add_succ, ih]
+    exact inductive_step_for_add_zero n ih
 }
 
 theorem transitivity (a b c : ℕ) : (a=b) ∧ (b=c) → (a=c) := by {
