@@ -1,5 +1,6 @@
 import SCI295MA.Basic
 import Mathlib.Data.Nat.Basic
+import Mathlib.Tactic
 
 --note: reflexivity is the axiom that 1 = 1, or 0 = 0, true by defition
 theorem one_is_succ_zero (n : ℕ) : (1 : ℕ) = Nat.succ (0 : ℕ) := by {
@@ -41,7 +42,13 @@ theorem addition_is_commutative (a b c : ℕ) : a + b + c = b + a + c := by {
   exact Nat.add_comm a b
 }
 
+lemma mult_by_zero_makes_comm (a b c : ℕ) : c = 0 → a*b*c = b*a*c := by {
+  intro hzero
+  linarith
+}
+
 theorem multiplication_is_commutative3 (a b c : ℕ) : a*b*c = b*a*c := by {
+  by_cases h : c = 0
 
 }
 
