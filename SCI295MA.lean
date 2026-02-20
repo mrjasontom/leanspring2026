@@ -69,3 +69,18 @@ def mySong1 : List Drum :=
 --make another type for Didgeridoo and laser and other
 
 --make another song as a List
+
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
+
+noncomputable def walkin (x : ℝ) : ℝ := Real.exp x
+
+noncomputable def moonwalkin (x : ℝ) : ℝ := Real.log x
+
+/-- The composition of moonwalkin and walkin is the identity.
+    Specifically: log(exp(x)) = x for all real x. -/
+theorem moon_walk_identity (x : ℝ) : moonwalkin (walkin x) = x := by {
+  -- Unfold our fun definitions
+  unfold moonwalkin walkin
+  -- Use the library lemma that log is the left-inverse of exp
+  exact Real.log_exp x
+}
