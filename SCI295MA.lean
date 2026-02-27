@@ -59,12 +59,42 @@ inductive Drum where
   | kick  : Drum
   | snare : Drum
   | hat : Drum
+  | tom : Drum
+  | cymbal : Drum
   deriving Repr -- This allows us to print/inspect the type
 
 -- Define a song as a List of Drum
 def mySong1 : List Drum :=
   [Drum.hat, Drum.kick, Drum.hat, Drum.snare,
    Drum.hat, Drum.kick, Drum.snare, Drum.snare]
+
+-- Define the new inductive type "Synth"
+inductive Synth where
+  | didgeridoo : Synth
+  | laser : Synth
+  | bass : Synth
+  | erhu : Synth
+  | woodblock : Synth
+  deriving Repr --- This allows us to print/inspect the type
+
+-- Define the new inductive type "Dynamics"
+inductive Dynamics where
+  | loud : Dynamics
+  | soft : Dynamics
+  deriving Repr --- This allows us to print/inspect the type
+
+-- Define the new inductive type "Tempo"
+inductive Tempo where
+  | fast : Tempo
+  | slow : Tempo
+  deriving Repr --- This allows us to print/inspect the type
+
+-- Define Product Type "Genre"
+structure Genre where
+ drum : Drum
+ tempo : Tempo
+
+def House : Genre := (Drum.kick, Tempo.fast)
 
 --make another type for Didgeridoo and laser and other
 
