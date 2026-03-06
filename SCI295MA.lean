@@ -1,6 +1,7 @@
 import SCI295MA.Basic
 import Mathlib.Data.Nat.Basic
 import Mathlib.Tactic
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 --note: reflexivity is the axiom that 1 = 1, or 0 = 0, true by defition
 theorem one_is_succ_zero (n : ℕ) : (1 : ℕ) = Nat.succ (0 : ℕ) := by {
@@ -94,13 +95,11 @@ structure Genre where
  drum : Drum
  tempo : Tempo
 
-def House : Genre := (Drum.kick, Tempo.fast)
+def House : Genre := ⟨Drum.kick, Tempo.fast⟩
 
 --make another type for Didgeridoo and laser and other
 
 --make another song as a List
-
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 noncomputable def walkin (x : ℝ) : ℝ := Real.exp x
 
@@ -114,3 +113,45 @@ theorem moon_walk_identity (x : ℝ) : moonwalkin (walkin x) = x := by {
   -- Use the library lemma that log is the left-inverse of exp
   exact Real.log_exp x
 }
+
+inductive Stroke where
+  | heng  : Stroke -- Horizontal (一)
+  | shu   : Stroke -- Vertical (丨)
+  | dian  : Stroke -- Dot (丶)
+  | pie   : Stroke -- Left-falling (丿)
+  | na    : Stroke -- Right-falling (乀)
+  | gou   : Stroke -- Hook (亅)
+  deriving Repr
+
+structure Character where
+  name       : String
+  components : List Stroke
+  deriving Repr
+
+-- Let's define the character "人" (Person)
+-- It consists of a 'pie' followed by a 'na'
+def Ren : Character := {
+  name := "人",
+  components := [Stroke.pie, Stroke.na]
+}
+
+-- Let's define the character "十" (Ten)
+def Shi : Character := {
+  name := "十",
+  components := [Stroke.heng, Stroke.shu]
+}
+
+def strokeCount (c : Character) : Nat :=
+  c.components.length
+
+#eval strokeCount Ren -- Output: 2
+#eval strokeCount Shi -- Output: 2
+
+inductive AdvancedStroke where
+  | basic (s : Stroke) : AdvancedStroke
+  | zhe   (first : Stroke) (then : AdvancedStroke) : AdvancedStroke
+  deriving Repr
+
+-- Example: A "Heng-Zhe-Gou" (Horizontal-Turn-Hook)
+-- This is a recursive way of saying "Do a heng, then turn into a hook"
+def hengZheGou := AdvancedStroke.zhe Stroke.heng (AdvancedStroke.basic Stroke.gou)
