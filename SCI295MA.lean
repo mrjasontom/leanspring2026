@@ -149,9 +149,11 @@ def strokeCount (c : Character) : Nat :=
 
 inductive AdvancedStroke where
   | basic (s : Stroke) : AdvancedStroke
-  | zhe   (first : Stroke) (then : AdvancedStroke) : AdvancedStroke
+  | zhe   (first : Stroke) (next : AdvancedStroke) : AdvancedStroke -- Renamed 'then' to 'next'
   deriving Repr
+
+-- Now this will work perfectly:
+def hengZheGou := AdvancedStroke.zhe Stroke.heng (AdvancedStroke.basic Stroke.gou)
 
 -- Example: A "Heng-Zhe-Gou" (Horizontal-Turn-Hook)
 -- This is a recursive way of saying "Do a heng, then turn into a hook"
-def hengZheGou := AdvancedStroke.zhe Stroke.heng (AdvancedStroke.basic Stroke.gou)
